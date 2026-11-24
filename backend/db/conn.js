@@ -1,17 +1,15 @@
 const { Sequelize } = require('sequelize')
-const dotenv = require('dotenv').config()
 
-const DBUSER = process.env.DBUSER;
-const DBPASSWORD = process.env.DBPASSWORD;
-
-const sequelize = new Sequelize('toughts', DBUSER, DBPASSWORD, {
+const sequelize = new Sequelize({
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'sqlite',
+    storage: './db/database.sqlite',
+     logging: false
 })
 
 try {
     sequelize.authenticate();
-    console.log(`Conectado com sucesso ao MySQL!`);
+    console.log(`Conectado com sucesso ao SQLite!`);
 } catch (error) {
     console.log(`Não foi possível conectar, erro: ${error}`);
 }
